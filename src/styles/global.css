@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+
+  --color-white: #ffffff;
+  --color-light: #f0f7f4;
+  --color-sky: #0ea5e9;
+  --color-green: #22c55e;
+  --color-navy: #0f2f3d;
+  --color-yellow: #facc15;
+  --color-dark: #14211f;
+  --color-sky-dark: #0284c7;
+  --color-green-dark: #16a34a;
+  --color-gray-100: #f1f5f9;
+  --color-gray-200: #e2e8f0;
+  --color-gray-400: #94a3b8;
+  --color-gray-600: #475569;
+  --color-gray-700: #334155;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-body);
+  color: var(--color-dark);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-sky);
+  color: #fff;
+}
+
+/* Promo bar + nav offset */
+#promo-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  background: #0d0d10;
+  color: #f3f3f1;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0 1rem;
+  text-align: center;
+}
+#promo-bar strong { font-weight: 700; }
+#promo-bar:hover { background: #16161a; }
+#nav { top: 2.25rem; }
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger helpers */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Counter number animation */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.count-animated {
+  animation: countUp 0.5s ease forwards;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-sky) 0%, var(--color-green) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Solar shimmer on hero CTA */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.btn-solar {
+  background: linear-gradient(90deg, #facc15 0%, #f97316 40%, #facc15 80%, #f97316 100%);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+  color: #14211f;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 0.875rem 2rem;
+  display: inline-block;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(250, 204, 21, 0.35);
+}
+.btn-solar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(250, 204, 21, 0.5);
+}
+
+.btn-outline {
+  border: 2px solid rgba(255,255,255,0.5);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 0.875rem 2rem;
+  display: inline-block;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-outline:hover {
+  border-color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+
+/* Card base */
+.card {
+  background: #fff;
+  border-radius: 1.25rem;
+  box-shadow: 0 2px 24px rgba(14, 165, 233, 0.07);
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.card:hover {
+  box-shadow: 0 8px 36px rgba(14, 165, 233, 0.14);
+  transform: translateY(-3px);
+}
+
+/* Step connector */
+.step-line::after {
+  content: '';
+  position: absolute;
+  top: 2rem;
+  left: calc(100% + 1px);
+  width: calc(100% - 2px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-sky), var(--color-green));
+  opacity: 0.3;
+}

@@ -1,0 +1,728 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const navLinks = [
+  { href: "#dlaczego", label: "Dlaczego foto?" },
+  { href: "#uslugi", label: "Usługi" },
+  { href: "#proces", label: "Jak działamy" },
+  { href: "#realizacje", label: "Realizacje" },
+  { href: "#wycena", label: "Wycena" },
+  { href: "#kontakt", label: "Kontakt" },
+];
+
+const benefits = [
+  {
+    icon: "💰",
+    title: "Nawet 90% niższe rachunki",
+    desc: "Przeciętna rodzina oszczędza 4 200–7 800 zł rocznie na prądzie. Instalacja zwraca się w 4–6 lat.",
+    highlight: "4 200 – 7 800 zł/rok",
+  },
+  {
+    icon: "🏛️",
+    title: "Dotacje i ulgi podatkowe",
+    desc: "Dofinansowanie Mój Prąd 5.0 do 6 000 zł, ulga termomodernizacyjna do 53 000 zł — załatwiamy dokumenty.",
+    highlight: "Do 6 000 zł dotacji",
+  },
+  {
+    icon: "🌱",
+    title: "Zero emisji CO₂",
+    desc: "Instalacja 6 kWp eliminuje ok. 2,7 t CO₂ rocznie — odpowiednik 2 300 km jazdy samochodem.",
+    highlight: "2,7 t CO₂ mniej/rok",
+  },
+  {
+    icon: "📈",
+    title: "Wzrost wartości nieruchomości",
+    desc: "Domy z fotowoltaiką sprzedają się szybciej i drożej — badania pokazują wzrost wartości o 3–7%.",
+    highlight: "+3–7% wartości domu",
+  },
+];
+
+const services = [
+  {
+    slug: "fotowoltaika",
+    icon: "☀️",
+    title: "Panele fotowoltaiczne",
+    desc: "Instalacje od 3 do 50 kWp dla domów i firm. Używamy paneli Tier 1 (Longi, JA Solar) z gwarancją 25 lat na moc.",
+    price: "od 18 900 zł",
+    features: ["Projekt + pozwolenia", "Montaż w 1–2 dni", "Gwarancja 25 lat", "Monitoring online"],
+    img: "photo-1509391366360-2e959784a276",
+    accent: "#0ea5e9",
+  },
+  {
+    slug: "magazyny",
+    icon: "🔋",
+    title: "Magazyny energii",
+    desc: "Baterie LiFePO₄ od 5 do 30 kWh. Prąd zgromadzony w dzień, zużyty wieczorem — niezależność od sieci.",
+    price: "od 14 900 zł",
+    features: ["Baterie LiFePO₄", "10 lat gwarancji", "Inteligentny BMS", "Off-grid ready"],
+    img: "photo-1558618666-fcd25c85cd64",
+    accent: "#22c55e",
+  },
+  {
+    slug: "pompy",
+    icon: "🌡️",
+    title: "Pompy ciepła",
+    desc: "Powietrzne pompy ciepła Daikin i Mitsubishi. Ogrzewanie i ciepła woda za 3× mniej niż gaz.",
+    price: "od 22 900 zł",
+    features: ["COP do 5,2", "Ogrzewanie + CWU", "Cicha praca", "R32 (ekologiczny)"],
+    img: "photo-1504711434969-e33886168f5c",
+    accent: "#facc15",
+  },
+  {
+    slug: "audyt",
+    icon: "📋",
+    title: "Audyt energetyczny",
+    desc: "Kompleksowa analiza zużycia energii Twojego domu. Wskażemy co zmienić, by płacić najmniej.",
+    price: "299 zł",
+    features: ["Raport PDF", "Plan oszczędności", "Doradztwo 60 min", "Ważny przy dotacjach"],
+    img: "photo-1434494878577-86c23bcb06b9",
+    accent: "#0f2f3d",
+  },
+];
+
+const steps = [
+  { num: "01", title: "Darmowa wycena", desc: "Wypełniasz formularz lub dzwonisz. W ciągu 24h kontaktuje się nasz doradca." },
+  { num: "02", title: "Projekt i oferta", desc: "Wizja lokalna, projekt techniczny, dobór instalacji do Twoich potrzeb." },
+  { num: "03", title: "Formalności", desc: "Zgłaszamy instalację do sieci energetycznej i składamy wniosek o dotację." },
+  { num: "04", title: "Montaż", desc: "Profesjonalny montaż 1–2 dni. Certyfikowani elektrycy, porządek po sobie." },
+  { num: "05", title: "Odbiór i start", desc: "Uruchomienie, szkolenie, dostęp do aplikacji. Od teraz licznik kręci się w tył." },
+];
+
+const reviews = [
+  {
+    name: "Marcin Kowalczyk",
+    city: "Kraków",
+    rating: 5,
+    text: "Zamówiłem instalację 8 kWp. EkoVolt dotrzymał terminu co do dnia, ekipa zostawiła po sobie ideał. Pierwszy rachunek za prąd — 18 zł. Polecam z całego serca!",
+    saving: "oszczędza ~680 zł/mies.",
+    img: "photo-1507003211169-0a1dd7228f2d",
+  },
+  {
+    name: "Katarzyna Wiśniewska",
+    city: "Wrocław",
+    rating: 5,
+    text: "Razem z pompą ciepła i baterią — dom energetycznie niezależny. Obsługa profesjonalna, wszystkie dotacje załatwili sami. Inwestycja życia!",
+    saving: "oszczędza ~1 100 zł/mies.",
+    img: "photo-1494790108377-be9c29b29330",
+  },
+  {
+    name: "Tomasz Jasiński",
+    city: "Warszawa",
+    rating: 5,
+    text: "Firma, lokal 450m². Instalacja 25 kWp. EkoVolt przeprowadził cały projekt, pomagał z dokumentami B+R. Zwrot kosztów w 3,5 roku.",
+    saving: "oszczędza ~3 200 zł/mies.",
+    img: "photo-1472099645785-5658abf4ff4e",
+  },
+  {
+    name: "Anna Nowak",
+    city: "Gdańsk",
+    rating: 5,
+    text: "Audyt energetyczny otworzył mi oczy — dowiedziałam się o uldze podatkowej 18 000 zł, której nie znałam. Ekipa sprawna, cena zgodna z ofertą.",
+    saving: "zaoszczędziła 18 000 zł na uldze",
+    img: "photo-1438761681033-6461ffad8d80",
+  },
+];
+
+const stats = [
+  { value: 1240, suffix: "+", label: "Instalacji" },
+  { value: 9800, suffix: " kWp", label: "Łączna moc" },
+  { value: 97, suffix: "%", label: "Zadowolonych klientów" },
+  { value: 4200, suffix: " zł", label: "Średnia oszczędność/rok" },
+];
+---
+
+<Layout>
+  <!-- ============================================================
+       NAWIGACJA
+  ============================================================ -->
+  <nav id="nav" class="fixed left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2 font-display font-800 text-xl text-white">
+        <span class="w-8 h-8 rounded-lg flex items-center justify-center text-base" style="background:linear-gradient(135deg,#facc15,#f97316)">⚡</span>
+        <span>Eko<span class="text-yellow-300">Volt</span></span>
+      </a>
+
+      <!-- Desktop nav -->
+      <ul class="hidden md:flex items-center gap-6">
+        {navLinks.map(l => (
+          <li><a href={l.href} class="text-sm font-medium text-white/80 hover:text-white transition-colors">{l.label}</a></li>
+        ))}
+      </ul>
+
+      <!-- CTA desktop -->
+      <a href="#wycena" class="hidden md:inline-flex items-center gap-2 btn-solar text-sm py-2.5 px-5">
+        ☀️ Darmowa wycena
+      </a>
+
+      <!-- Burger -->
+      <button id="burger" class="md:hidden p-2 text-white" aria-label="Menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-navy border-t border-white/10">
+      <ul class="flex flex-col px-4 py-4 gap-3">
+        {navLinks.map(l => (
+          <li><a href={l.href} class="block text-white/80 hover:text-white py-1 font-medium">{l.label}</a></li>
+        ))}
+        <li>
+          <a href="#wycena" class="btn-solar block text-center mt-2 py-3">☀️ Darmowa wycena</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <header id="hero" class="relative min-h-screen flex items-center overflow-hidden" style="background:#0f2f3d;">
+    <!-- Background image -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1600&q=80"
+        alt="Dom z panelami słonecznymi"
+        class="w-full h-full object-cover opacity-30"
+      />
+      <div class="absolute inset-0" style="background:linear-gradient(135deg, rgba(15,47,61,0.92) 0%, rgba(14,165,233,0.18) 100%)"></div>
+    </div>
+
+    <!-- Decorative glow orbs -->
+    <div class="absolute top-1/4 right-0 w-96 h-96 rounded-full opacity-10 blur-3xl pointer-events-none" style="background:#22c55e"></div>
+    <div class="absolute bottom-1/4 left-0 w-72 h-72 rounded-full opacity-10 blur-3xl pointer-events-none" style="background:#0ea5e9"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-32 pb-20 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-600 mb-6" style="background:rgba(250,204,21,0.15);color:#facc15;border:1px solid rgba(250,204,21,0.3)">
+          <span>⚡</span> #1 firma fotowoltaiczna w regionie
+        </div>
+
+        <h1 class="font-display font-800 text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
+          Zamień słońce<br />
+          w <span class="gradient-text">oszczędności</span>
+        </h1>
+
+        <p class="text-lg text-white/75 mb-8 max-w-xl leading-relaxed">
+          Profesjonalny montaż fotowoltaiki, magazynów energii i pomp ciepła.
+          Pomagamy uzyskać dotacje do <strong class="text-yellow-300">6 000 zł</strong>.
+          Zwrot inwestycji już w <strong class="text-yellow-300">4–6 lat</strong>.
+        </p>
+
+        <div class="flex flex-wrap gap-4 mb-10">
+          <a href="#wycena" class="btn-solar">☀️ Bezpłatna wycena</a>
+          <a href="#uslugi" class="btn-outline">Zobacz ofertę →</a>
+        </div>
+
+        <!-- Trust signals -->
+        <div class="flex flex-wrap items-center gap-6">
+          <div class="flex items-center gap-2 text-white/60 text-sm">
+            <span class="text-yellow-400">★★★★★</span>
+            <span>4,9/5 (320+ opinii)</span>
+          </div>
+          <div class="flex items-center gap-2 text-white/60 text-sm">
+            <span class="text-green-400">✓</span>
+            <span>Certyfikat UDT</span>
+          </div>
+          <div class="flex items-center gap-2 text-white/60 text-sm">
+            <span class="text-sky-400">✓</span>
+            <span>10 lat gwarancji</span>
+          </div>
+          <div class="flex items-center gap-2 text-white/60 text-sm">
+            <span class="text-green-400">✓</span>
+            <span>Pomagamy z dotacją</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero stats card -->
+      <div class="hidden lg:block">
+        <div class="card p-8 max-w-sm ml-auto" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(16px);">
+          <p class="text-white/60 text-sm mb-5 uppercase tracking-widest font-600">Twoje potencjalne oszczędności</p>
+          <div class="grid grid-cols-2 gap-6">
+            {stats.map(s => (
+              <div>
+                <p class="font-display font-800 text-3xl text-white">
+                  <span class="counter" data-target={s.value} data-suffix={s.suffix}>{s.value.toLocaleString("pl-PL")}{s.suffix}</span>
+                </p>
+                <p class="text-white/50 text-xs mt-1">{s.label}</p>
+              </div>
+            ))}
+          </div>
+          <div class="mt-6 pt-6 border-t border-white/10">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg" style="background:rgba(34,197,94,0.2)">🌱</div>
+              <div>
+                <p class="text-white text-sm font-600">CO₂ zaoszczędzony</p>
+                <p class="text-green-400 font-800 text-lg">
+                  <span class="counter" data-target="3348" data-suffix=" t">0 t</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wave bottom -->
+    <div class="absolute bottom-0 left-0 right-0 z-10">
+      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 80L1440 80L1440 20C1200 70 900 0 600 40C300 80 100 10 0 30Z" fill="#f0f7f4"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       DLACZEGO FOTOWOLTAIKA
+  ============================================================ -->
+  <section id="dlaczego" class="py-24" style="background:#f0f7f4;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block px-4 py-1.5 rounded-full text-sm font-600 mb-4" style="background:rgba(14,165,233,0.1);color:#0ea5e9;">Dlaczego warto?</span>
+        <h2 class="font-display font-800 text-4xl text-dark mb-4">Energia słoneczna się opłaca</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto text-lg">Fotowoltaika to nie wydatek — to inwestycja zwracająca się rok po roku, z gwarancją przez 25 lat.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {benefits.map((b, i) => (
+          <div class={`card p-6 reveal reveal-delay-${i + 1}`}>
+            <div class="text-4xl mb-4">{b.icon}</div>
+            <h3 class="font-display font-700 text-lg text-dark mb-2">{b.title}</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">{b.desc}</p>
+            <div class="inline-block px-3 py-1 rounded-full text-xs font-700" style="background:rgba(34,197,94,0.12);color:#16a34a;">
+              {b.highlight}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Big number bar -->
+      <div class="mt-16 rounded-2xl p-8 grid sm:grid-cols-3 gap-8 text-center reveal" style="background:linear-gradient(135deg,#0f2f3d 0%,#0ea5e9 100%);">
+        <div>
+          <p class="font-display font-800 text-5xl text-white mb-2">
+            <span class="counter" data-target="90" data-suffix="%">0%</span>
+          </p>
+          <p class="text-white/60">Redukcja rachunków za prąd</p>
+        </div>
+        <div class="sm:border-x sm:border-white/20">
+          <p class="font-display font-800 text-5xl text-white mb-2">
+            <span class="counter" data-target="25" data-suffix=" lat">0 lat</span>
+          </p>
+          <p class="text-white/60">Gwarancja na panele</p>
+        </div>
+        <div>
+          <p class="font-display font-800 text-5xl text-white mb-2">
+            <span class="counter" data-target="6" data-suffix=" tys.">0 tys.</span>
+          </p>
+          <p class="text-white/60">Zadowolonych klientów w Polsce</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       USŁUGI
+  ============================================================ -->
+  <section id="uslugi" class="py-24" style="background:#fff;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block px-4 py-1.5 rounded-full text-sm font-600 mb-4" style="background:rgba(34,197,94,0.1);color:#22c55e;">Nasze usługi</span>
+        <h2 class="font-display font-800 text-4xl text-dark mb-4">Kompleksowa obsługa OZE</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto text-lg">Od projektu po odbiór — jeden wykonawca, pełna odpowiedzialność.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        {services.map((s, i) => (
+          <div class={`card overflow-hidden reveal reveal-delay-${(i % 2) + 1}`}>
+            <div class="relative h-52 overflow-hidden" style={`background:${s.accent}22;`}>
+              <img
+                src={`https://images.unsplash.com/photo-${s.img}?auto=format&fit=crop&w=800&q=80`}
+                alt={s.title}
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div class="absolute inset-0" style={`background:linear-gradient(to top, rgba(15,47,61,0.6) 0%, transparent 60%)`}></div>
+              <div class="absolute bottom-4 left-4 text-white">
+                <span class="text-3xl">{s.icon}</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-start justify-between mb-3">
+                <h3 class="font-display font-700 text-xl text-dark">{s.title}</h3>
+                <span class="text-sm font-700 px-3 py-1 rounded-full whitespace-nowrap ml-2" style={`background:${s.accent}18;color:${s.accent};`}>{s.price}</span>
+              </div>
+              <p class="text-gray-600 text-sm leading-relaxed mb-4">{s.desc}</p>
+              <ul class="grid grid-cols-2 gap-2">
+                {s.features.map(f => (
+                  <li class="flex items-center gap-2 text-sm text-gray-700">
+                    <span class="w-4 h-4 rounded-full flex items-center justify-center text-xs flex-shrink-0" style="background:#22c55e20;color:#22c55e;">✓</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <a href="#wycena" class="mt-5 inline-flex items-center gap-1.5 text-sm font-600 transition-colors" style={`color:${s.accent};`}>
+                Zapytaj o wycenę <span>→</span>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROCES MONTAŻU
+  ============================================================ -->
+  <section id="proces" class="py-24" style="background:#f0f7f4;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block px-4 py-1.5 rounded-full text-sm font-600 mb-4" style="background:rgba(250,204,21,0.15);color:#d97706;">Jak działamy</span>
+        <h2 class="font-display font-800 text-4xl text-dark mb-4">Prosta droga do własnej energii</h2>
+        <p class="text-gray-600 max-w-xl mx-auto text-lg">5 kroków od kontaktu do niezależności energetycznej.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        {steps.map((step, i) => (
+          <div class={`card p-6 text-center reveal reveal-delay-${Math.min(i + 1, 4)} relative`}>
+            <div class="w-14 h-14 rounded-full flex items-center justify-center text-white font-display font-800 text-lg mx-auto mb-4" style="background:linear-gradient(135deg,#0ea5e9,#22c55e)">
+              {step.num}
+            </div>
+            <h3 class="font-display font-700 text-base text-dark mb-2">{step.title}</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">{step.desc}</p>
+            {i < steps.length - 1 && (
+              <div class="hidden lg:block absolute top-10 right-0 translate-x-1/2 z-10 text-gray-300 text-xl">→</div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center reveal">
+        <a href="#wycena" class="btn-solar inline-flex items-center gap-2">
+          ☀️ Zacznij od darmowej wyceny
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       REALIZACJE / OPINIE
+  ============================================================ -->
+  <section id="realizacje" class="py-24" style="background:#fff;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block px-4 py-1.5 rounded-full text-sm font-600 mb-4" style="background:rgba(14,165,233,0.1);color:#0ea5e9;">Opinie klientów</span>
+        <h2 class="font-display font-800 text-4xl text-dark mb-4">Oni nam zaufali</h2>
+        <p class="text-gray-600 max-w-xl mx-auto text-lg">Ponad 1 200 instalacji w całej Polsce — oto co mówią nasi klienci.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {reviews.map((r, i) => (
+          <div class={`card p-6 flex flex-col reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <!-- Stars -->
+            <div class="flex gap-0.5 mb-3">
+              {Array.from({length: r.rating}).map(() => (
+                <span class="text-yellow-400 text-lg">★</span>
+              ))}
+            </div>
+            <p class="text-gray-700 text-sm leading-relaxed flex-1 mb-4">"{r.text}"</p>
+            <!-- Saving badge -->
+            <div class="inline-block px-3 py-1 rounded-full text-xs font-700 mb-4" style="background:rgba(34,197,94,0.1);color:#16a34a;">
+              {r.saving}
+            </div>
+            <!-- Author -->
+            <div class="flex items-center gap-3">
+              <img
+                src={`https://images.unsplash.com/photo-${r.img}?auto=format&fit=crop&w=80&q=80`}
+                alt={r.name}
+                class="w-10 h-10 rounded-full object-cover"
+                loading="lazy"
+              />
+              <div>
+                <p class="font-600 text-dark text-sm">{r.name}</p>
+                <p class="text-gray-500 text-xs">{r.city}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Logo bar (fake partners) -->
+      <div class="mt-16 reveal">
+        <p class="text-center text-gray-400 text-sm uppercase tracking-widest mb-8">Partnerzy i certyfikaty</p>
+        <div class="flex flex-wrap justify-center items-center gap-8 opacity-50">
+          {["Longi Solar", "JA Solar", "SMA", "Solaredge", "Daikin", "UDT Cert"].map(p => (
+            <span class="font-display font-700 text-gray-400 text-sm">{p}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FORMULARZ WYCENY + MAPA
+  ============================================================ -->
+  <section id="wycena" class="py-24" style="background:linear-gradient(135deg,#0f2f3d 0%,#0c3a4a 100%);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block px-4 py-1.5 rounded-full text-sm font-600 mb-4" style="background:rgba(250,204,21,0.15);color:#facc15;">Darmowa wycena</span>
+        <h2 class="font-display font-800 text-4xl text-white mb-4">Sprawdź ile zaoszczędzisz</h2>
+        <p class="text-white/60 max-w-xl mx-auto text-lg">Wypełnij formularz — oddzwonimy w ciągu 24h z bezpłatną wyceną.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Form -->
+        <div class="reveal">
+          <form class="space-y-5" onsubmit="return false;">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-white/70 text-sm font-500 mb-1.5">Imię i nazwisko *</label>
+                <input
+                  type="text"
+                  placeholder="Jan Kowalski"
+                  class="w-full px-4 py-3 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 text-sm"
+                  style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);focus:ring-color:#0ea5e9;"
+                />
+              </div>
+              <div>
+                <label class="block text-white/70 text-sm font-500 mb-1.5">Telefon *</label>
+                <input
+                  type="tel"
+                  placeholder="+48 600 000 000"
+                  class="w-full px-4 py-3 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 text-sm"
+                  style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);"
+                />
+              </div>
+            </div>
+            <div>
+              <label class="block text-white/70 text-sm font-500 mb-1.5">E-mail</label>
+              <input
+                type="email"
+                placeholder="jan@example.com"
+                class="w-full px-4 py-3 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 text-sm"
+                style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);"
+              />
+            </div>
+            <div>
+              <label class="block text-white/70 text-sm font-500 mb-1.5">Interesuje mnie</label>
+              <select
+                class="w-full px-4 py-3 rounded-xl text-white/80 focus:outline-none focus:ring-2 text-sm"
+                style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);"
+              >
+                <option value="">-- Wybierz usługę --</option>
+                <option value="foto">Fotowoltaika</option>
+                <option value="magazyn">Magazyn energii</option>
+                <option value="pompa">Pompa ciepła</option>
+                <option value="combo">Pakiet: foto + magazyn</option>
+                <option value="audyt">Audyt energetyczny</option>
+              </select>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-white/70 text-sm font-500 mb-1.5">Powierzchnia dachu (m²)</label>
+                <input
+                  type="number"
+                  placeholder="np. 40"
+                  class="w-full px-4 py-3 rounded-xl text-white placeholder-white/30 focus:outline-none text-sm"
+                  style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);"
+                />
+              </div>
+              <div>
+                <label class="block text-white/70 text-sm font-500 mb-1.5">Mies. rachunek za prąd (zł)</label>
+                <input
+                  type="number"
+                  placeholder="np. 350"
+                  class="w-full px-4 py-3 rounded-xl text-white placeholder-white/30 focus:outline-none text-sm"
+                  style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);"
+                />
+              </div>
+            </div>
+            <div>
+              <label class="block text-white/70 text-sm font-500 mb-1.5">Uwagi / pytania</label>
+              <textarea
+                rows="3"
+                placeholder="np. interesuje mnie dofinansowanie Mój Prąd..."
+                class="w-full px-4 py-3 rounded-xl text-white placeholder-white/30 focus:outline-none resize-none text-sm"
+                style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);"
+              ></textarea>
+            </div>
+
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" class="mt-0.5 w-4 h-4 accent-sky-400 flex-shrink-0" />
+              <span class="text-white/50 text-xs leading-relaxed">
+                Wyrażam zgodę na przetwarzanie moich danych osobowych przez EkoVolt Sp. z o.o. w celu przygotowania wyceny i kontaktu handlowego (RODO).
+              </span>
+            </label>
+
+            <button
+              type="submit"
+              class="btn-solar w-full text-center py-4 text-base cursor-pointer"
+            >
+              ☀️ Wyślij zapytanie — wycena gratis
+            </button>
+          </form>
+        </div>
+
+        <!-- Map + contact -->
+        <div class="space-y-6 reveal reveal-delay-2">
+          <!-- Map iframe (OSM) -->
+          <div class="rounded-2xl overflow-hidden" style="border:1px solid rgba(255,255,255,0.1);">
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=19.9%2C50.0%2C20.1%2C50.1&layer=mapnik&marker=50.06143,19.93658"
+              width="100%"
+              height="280"
+              loading="lazy"
+              title="Mapa EkoVolt Kraków"
+              style="border:none;display:block;"
+            ></iframe>
+          </div>
+
+          <!-- Contact info -->
+          <div class="rounded-2xl p-6 space-y-4" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);">
+            <h3 class="font-display font-700 text-white text-lg mb-4">Dane kontaktowe</h3>
+            <div class="flex items-start gap-3">
+              <span class="text-sky-400 text-lg mt-0.5">📍</span>
+              <div>
+                <p class="text-white font-500">EkoVolt Sp. z o.o.</p>
+                <p class="text-white/60 text-sm">ul. Słoneczna 14, 30-340 Kraków</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-green-400 text-lg">📞</span>
+              <a href="tel:+48123456789" class="text-white hover:text-green-400 transition-colors font-500">+48 123 456 789</a>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-yellow-400 text-lg">✉️</span>
+              <a href="mailto:wycena@ekovolt.pl" class="text-white hover:text-yellow-300 transition-colors font-500">wycena@ekovolt.pl</a>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-sky-400 text-lg">🕐</span>
+              <div>
+                <p class="text-white/60 text-sm">Pon–Pt: 8:00–18:00</p>
+                <p class="text-white/60 text-sm">Sob: 9:00–14:00</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Badges -->
+          <div class="grid grid-cols-3 gap-3">
+            {[
+              { icon: "🏆", label: "UDT Cert." },
+              { icon: "🛡️", label: "Gwarancja 10 lat" },
+              { icon: "💳", label: "Leasing 0%" },
+            ].map(b => (
+              <div class="rounded-xl p-3 text-center" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);">
+                <div class="text-2xl mb-1">{b.icon}</div>
+                <p class="text-white/70 text-xs font-500">{b.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer id="kontakt" style="background:#0a1e27;color:#fff;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <!-- Brand -->
+        <div class="lg:col-span-1">
+          <a href="#" class="inline-flex items-center gap-2 font-display font-800 text-xl text-white mb-4">
+            <span class="w-8 h-8 rounded-lg flex items-center justify-center text-base" style="background:linear-gradient(135deg,#facc15,#f97316)">⚡</span>
+            <span>Eko<span class="text-yellow-300">Volt</span></span>
+          </a>
+          <p class="text-white/50 text-sm leading-relaxed mb-4">
+            Profesjonalna fotowoltaika, magazyny energii i pompy ciepła. Twój lokalny partner w transformacji energetycznej.
+          </p>
+          <div class="flex gap-3">
+            {["fb", "ig", "yt", "li"].map(s => (
+              <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-white/40 hover:text-white transition-colors text-xs font-700 uppercase" style="background:rgba(255,255,255,0.07);">{s}</a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Usługi -->
+        <div>
+          <h4 class="font-display font-700 text-white text-sm uppercase tracking-widest mb-4">Usługi</h4>
+          <ul class="space-y-2">
+            {["Fotowoltaika", "Magazyny energii", "Pompy ciepła", "Audyt energetyczny", "Serwis i monitoring"].map(item => (
+              <li><a href="#uslugi" class="text-white/50 text-sm hover:text-white transition-colors">{item}</a></li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Firma -->
+        <div>
+          <h4 class="font-display font-700 text-white text-sm uppercase tracking-widest mb-4">Firma</h4>
+          <ul class="space-y-2">
+            {["O nas", "Realizacje", "Blog", "Dotacje Mój Prąd", "Kariera"].map(item => (
+              <li><a href="#" class="text-white/50 text-sm hover:text-white transition-colors">{item}</a></li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Kontakt -->
+        <div>
+          <h4 class="font-display font-700 text-white text-sm uppercase tracking-widest mb-4">Kontakt</h4>
+          <ul class="space-y-3">
+            <li class="text-white/50 text-sm">📍 ul. Słoneczna 14<br />30-340 Kraków</li>
+            <li><a href="tel:+48123456789" class="text-white/50 text-sm hover:text-white transition-colors">📞 +48 123 456 789</a></li>
+            <li><a href="mailto:wycena@ekovolt.pl" class="text-white/50 text-sm hover:text-white transition-colors">✉️ wycena@ekovolt.pl</a></li>
+            <li class="text-white/50 text-sm">🕐 Pon–Pt 8:00–18:00</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-white/30 text-xs">© 2024 EkoVolt Sp. z o.o. NIP: 678-123-45-67 · Wszelkie prawa zastrzeżone.</p>
+        <div class="flex gap-4">
+          <a href="#" class="text-white/30 text-xs hover:text-white/60">Polityka prywatności</a>
+          <a href="#" class="text-white/30 text-xs hover:text-white/60">Regulamin</a>
+        </div>
+      </div>
+
+      <!-- OBOWIĄZKOWY CREDIT -->
+      <div class="mt-6 text-center">
+        <a
+          href="https://stronainternetowa.biz"
+          target="_blank"
+          rel="noopener"
+          class="text-white/25 text-xs hover:text-sky-400 transition-colors"
+        >
+          Przykładowa strona zrobiona przez <strong class="font-700">stronainternetowa.biz</strong>
+        </a>
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  #nav.scrolled {
+    background: color-mix(in srgb, #0f2f3d 92%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(14, 165, 233, 0.15);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #0ea5e9 !important;
+    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.25);
+  }
+
+  .font-800 { font-weight: 800; }
+  .font-700 { font-weight: 700; }
+  .font-600 { font-weight: 600; }
+  .font-500 { font-weight: 500; }
+
+  select option {
+    background: #0f2f3d;
+    color: #fff;
+  }
+</style>
