@@ -1,6 +1,6 @@
 # EkoVolt — strona firmowa firmy fotowoltaicznej
 
-Przykładowa strona z portfolio [stronainternetowa.biz](https://stronainternetowa.biz).
+Przykładowa strona z portfolio [100strona.pl](https://100strona.pl).
 
 ## O stronie
 
